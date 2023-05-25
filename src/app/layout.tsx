@@ -22,6 +22,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
   return (
     <html lang="en">
+      <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+      <GoogleTagManager />
+      <Script src="https://buttons.github.io/buttons.js" />
       <body className={body} suppressHydrationWarning={true}>
         <GoogleTagManagerNoScript />
         <header>
@@ -37,8 +40,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <Footer />
         </footer>
       </body>
-      <GoogleTagManager />
-      <Script src="https://buttons.github.io/buttons.js" />
     </html>
   );
 }

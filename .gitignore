@@ -31,6 +31,10 @@ yarn-error.log*
 # vercel
 .vercel
 
+# serverless
+.sst
+cdk.context.json
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

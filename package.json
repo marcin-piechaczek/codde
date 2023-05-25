@@ -5,13 +5,18 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "dev": "next dev",
+    "dev": "sst bind next dev",
     "build": "next build",
     "start": "next start",
     "prettier:format": "prettier --write .",
     "prettier:check": "prettier --check \"**/*.{ts,tsx,json}\"",
     "lint": "next lint",
-    "eslint:format": "eslint . --ext ts --ext tsx --ext js"
+    "eslint:format": "eslint . --ext ts --ext tsx --ext js",
+    "sst:dev": "sst dev",
+    "sst:deploy": "sst deploy",
+    "sst:remove": "sst remove",
+    "sst:build": "sst build",
+    "sst:console": "sst console"
   },
   "dependencies": {
     "@octokit/rest": "^19.0.11",
@@ -45,7 +50,10 @@
     "prettier-plugin-tailwindcss": "^0.3.0",
     "tailwind-scrollbar": "^3.0.4",
     "tailwindcss": "3.3.2",
-    "typescript": "5.0.4"
+    "typescript": "5.0.4",
+    "sst": "^2.10.4",
+    "aws-cdk-lib": "2.79.1",
+    "constructs": "10.1.156"
   },
   "lint-staged": {
     "src/**/*": [
