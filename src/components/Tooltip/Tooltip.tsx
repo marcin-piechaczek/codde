@@ -7,7 +7,7 @@ interface TextInputProps {
 
 export const Tooltip = ({ children, message }: TextInputProps) => {
   return (
-    <div className="tooltip" data-tip={message}>
+    <div className="tooltip tooltip-left md:tooltip-right" data-tip={message}>
       {children}
     </div>
   );
