@@ -6,6 +6,7 @@ import { Hero } from '@/components/Hero';
 import { Navbar } from '@/components/Navbar';
 import { Wrapper } from '@/components/Wrapper';
 import clsx from 'clsx';
+import Script from 'next/script';
 import { ReactNode } from 'react';
 
 export const metadata = {
@@ -21,7 +22,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
   return (
     <html lang="en">
-      <GoogleTagManager />
       <body className={body} suppressHydrationWarning={true}>
         <GoogleTagManagerNoScript />
         <header>
@@ -37,6 +37,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <Footer />
         </footer>
       </body>
+      <GoogleTagManager />
+      <Script src="https://buttons.github.io/buttons.js" />
     </html>
   );
 }
