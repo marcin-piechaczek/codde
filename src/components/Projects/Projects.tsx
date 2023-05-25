@@ -19,9 +19,5 @@ export const Projects = async ({ search, page }: ProjectsProps) => {
     page,
   });
 
-  return (
-    <>
-      <ProjectsGrid totalPages={totalPages || 1} projects={projects} />
-    </>
-  );
+  return <ProjectsGrid totalPages={totalPages || 1} projects={projects} />;
 };

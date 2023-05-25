@@ -19,7 +19,7 @@ export const SearchForm = () => {
   } = useForm<FormValues>({ defaultValues: { search: defaultSearch } });
 
   const onSubmit: SubmitHandler<FormValues> = async ({ search }) =>
-    router.push('?search=' + search);
+    router.push('/search?package=' + search);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="form-control">

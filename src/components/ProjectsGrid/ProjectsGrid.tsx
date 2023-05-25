@@ -23,6 +23,11 @@ export const ProjectsGrid = ({ projects, totalPages }: ProjectsGridProps) => {
           ))}
         </div>
       )}
+      {projects.length > 5 && (
+        <div className="mt-5">
+          <Pagination totalPages={totalPages} />
+        </div>
+      )}
     </div>
   );
 };
