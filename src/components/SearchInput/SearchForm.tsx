@@ -23,7 +23,7 @@ export const SearchForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="form-control">
-      <label className="input-group w-full">
+      <label className="input-group w-full text-white">
         <input
           {...register('search', { required: true })}
           type="text"
@@ -31,7 +31,7 @@ export const SearchForm = () => {
           className="input-bordered input w-4/6"
         />
         <span>
-          <button type="submit" className="h-full w-full">
+          <button type="submit" className="h-full w-full text-white">
             Search
           </button>
         </span>

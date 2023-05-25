@@ -21,7 +21,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   const body = clsx(roboto.className, 'flex h-screen flex-col');
 
   return (
-    <html lang="en">
+    <html lang="en" data-theme="dark">
       <link rel="icon" type="image/x-icon" href="/favicon.ico" />
       <GoogleTagManager />
       <Script src="https://buttons.github.io/buttons.js" />

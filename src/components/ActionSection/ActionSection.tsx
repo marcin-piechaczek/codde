@@ -13,7 +13,7 @@ export const ActionSection = () => {
   const { isOwnTokenSelected, token, toggle, setToken } = useOwnToken();
   const checkboxStyles = clsx(
     { invisible: !isOwnTokenSelected, visible: isOwnTokenSelected },
-    'mb-4 mt-4 flex items-center',
+    'mb-4 mt-4 flex items-center text-white',
   );
 
   return (
@@ -31,7 +31,7 @@ export const ActionSection = () => {
           onChange={event => setToken(event.target.value)}
           placeholder="Enter your token"
         />
-        <div className="ml-4">
+        <div className="ml-4 text-white">
           <Tooltip message="Login into your GitHub account click settings next to Developer settings and generate a new personal access token">
             <InfoIcon />
           </Tooltip>

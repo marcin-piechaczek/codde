@@ -7,7 +7,7 @@ export const Navbar = () => {
       <Container>
         <div className="navbar">
           <div className="flex-1">
-            <NextLink href="/" className="btn-ghost btn text-xl normal-case">
+            <NextLink href="/" className="btn-ghost btn text-xl normal-case text-white">
               codde
             </NextLink>
           </div>
