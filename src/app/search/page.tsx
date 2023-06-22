@@ -6,6 +6,8 @@ interface SearchProps {
   searchParams?: { [key: string]: string | string[] | undefined };
 }
 
+export const revalidate = 3600;
+
 export default async function SearchPage({ searchParams }: SearchProps) {
   const searchedPackage = searchParams?.package || '';
   const page = searchParams?.page || 1;
@@ -13,9 +15,7 @@ export default async function SearchPage({ searchParams }: SearchProps) {
   return (
     <Container>
       <Wrapper>
-        {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-        {/* @ts-expect-error /> */}
-        {searchedPackage && <Projects page={page} search={searchedPackage} />}
+        {searchedPackage && <Projects page={+page} search={searchedPackage as string} />}
       </Wrapper>
     </Container>
   );

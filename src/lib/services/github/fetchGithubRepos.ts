@@ -1,6 +1,7 @@
 import { githubPagesLimit, perPageLimit } from '@/lib/services/github/config';
 import { fetchRepoDetails } from '@/lib/services/github/fetchRepoDetails';
 import { Octokit } from '@octokit/rest';
+import { cache } from 'react';
 
 export const TECH_LANGUAGES = {
   typescript: 'language:typescript+language:javascript',
@@ -38,44 +39,40 @@ export interface Project {
   dependencies: { [key: string]: string } | undefined;
 }
 
-export const fetchGithubRepos = async ({
-  keyword,
-  token,
-  language,
-  packageManager,
-  page = 1,
-}: FetchGithubRepos) => {
-  const octokit = new Octokit({
-    auth: token || process.env.GITHUB_TOKEN,
-  });
-  const searchLang = language ? TECH_LANGUAGES[language] : TECH_LANGUAGES.typescript;
+export const fetchGithubRepos = cache(
+  async ({ keyword, token, language, packageManager, page = 1 }: FetchGithubRepos) => {
+    const octokit = new Octokit({
+      auth: token || process.env.GITHUB_TOKEN,
+    });
+    const searchLang = language ? TECH_LANGUAGES[language] : TECH_LANGUAGES.typescript;
 
-  const response = await octokit.rest.search
-    .repos({
-      q: `"${keyword}"+${searchLang}`,
-      per_page: perPageLimit,
-      page,
-      headers: {
-        Accept: 'application/vnd.github+json',
-      },
-    })
-    .catch(error => {
-      throw new Error('Error during search ' + error.message);
+    const response = await octokit.rest.search
+      .repos({
+        q: `"${keyword}"+${searchLang}`,
+        per_page: perPageLimit,
+        page,
+        headers: {
+          Accept: 'application/vnd.github+json',
+        },
+      })
+      .catch(error => {
+        throw new Error('Error during search ' + error.message);
+      });
+
+    const repositories = response.data.items;
+    const githubSearchLimit = Number((response.data.total_count / perPageLimit).toFixed());
+    const totalPages = githubSearchLimit > githubPagesLimit ? githubPagesLimit : githubSearchLimit;
+
+    const repoDetails = await fetchRepoDetails({
+      repositories,
+      packageManager,
+      client: octokit,
+      keyword,
+      tech: language,
     });
 
-  const repositories = response.data.items;
-  const githubSearchLimit = Number((response.data.total_count / perPageLimit).toFixed());
-  const totalPages = githubSearchLimit > githubPagesLimit ? githubPagesLimit : githubSearchLimit;
+    const projects = repoDetails.filter(Boolean) as Project[];
 
-  const repoDetails = await fetchRepoDetails({
-    repositories,
-    packageManager,
-    client: octokit,
-    keyword,
-    tech: language,
-  });
-
-  const projects = repoDetails.filter(Boolean) as Project[];
-
-  return { projects, totalPages };
-};
+    return { projects, totalPages };
+  },
+);
